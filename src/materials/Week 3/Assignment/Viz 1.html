@@ -1,0 +1,85 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>D3 Training - Assignment #3</title>
+        <script type="text/javascript" src="d3\d3.js"></script>
+    </head>
+    <body>
+        <style>
+            .rectangle {
+                fill: blue;
+                border-style:dashed;
+            }
+
+            .circle {
+                fill:orange;
+                stroke: blue;
+                stroke-width: 2px;
+            }
+
+            .hexagon {
+                stroke: red;
+                stroke-width: 2px;
+                fill: pink;
+            }
+                
+        </style>
+        <h1>Assignment #3 - Part 1</h1>
+        <script type="text/javascript">
+       
+
+        let canvasHeight = 500;
+        let canvasWidth = 500;
+
+        let svg = d3.select("body").append("svg");
+        svg.attr("height", canvasHeight);
+        svg.attr("width", canvasWidth); 
+        
+        let rectangleHeight = 20;
+        let rectangleWidth = 100;
+
+        let rectangleX = 10;
+        let rectangleY = 10;
+
+        //rect height, width, x and y
+        let rectangle = svg.append("rect");
+        rectangle
+            .attr("x", rectangleX)
+            .attr("y", rectangleY)
+            .attr("height", rectangleHeight)
+            .attr("width", rectangleWidth)
+            .attr("class", "rectangle");
+        
+        let circleData = [1,1,1];
+
+        //cx="10" cy="10" r="100"
+        let circles = svg.selectAll("circle").data(circleData);
+
+        circles
+            .enter()
+            .append("circle")
+            .attr("cx", (d,i) => { return (i + 1) * 100})
+            .attr("cy", 100)
+            .attr("r",(d,i) => { return (2**i)*2})
+            .attr("class", "circle");
+        
+        let octagon = svg.selectAll("path").data([1]);
+
+        octagon
+            .enter()
+            .append("path")
+            .attr("d", () => {
+                
+                return "M 150 200 L 200 200 L 250 250 L 250 300 L 200 350 L 150 350 L 100 300 L 100 250 L 150 200"
+                //return "M 150 200 L 200 250 L 200 300 L 150 350 L 100 300 L 100 250 L 150 200"  //hexgon
+            })
+            .attr("class","hexagon");
+            //return "M 10 25 L 10 75 L 60 75 L 10 25"
+        </script>
+
+
+
+
+    </body>
+
+</html>

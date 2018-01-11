@@ -1,0 +1,78 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>D3 Training - Assignment #3 - Part 3</title>
+        <script type="text/javascript" src="d3\d3.js"></script>
+    </head>
+    <body>
+        <style>
+            h1 {
+                font-family: Calibri;
+            }
+            #positionsFrame {
+                width: 200px;
+                display: inline-block;
+                float: right;
+            }       
+            </style>
+        <h1>Assignment #3 - Part 3</h1>
+                
+        <script type="text/javascript">
+       
+        let canvasHeight = 600;
+        let canvasWidth = 600;
+
+        let svg = d3.select("body").append("svg");
+        svg.attr("height", canvasHeight);
+        svg.attr("width", canvasWidth); 
+
+        d3.json('/data.json', function (error, data) {
+            animate(data);
+        }); 
+
+        function updateViz(data) {
+            
+            var circles = svg.selectAll("circle").data(data);
+            
+            circles
+                .enter()
+                .append("circle")
+                .attr("cx", d => { return Math.floor(Math.random() * (canvasWidth - 100)) })
+                .attr("cy", d => { return Math.floor(Math.random() * (canvasHeight - 100)) })
+                .attr("r",d => { return d.size } )
+                .attr("fill", d=> {return d.color} )
+                .attr("stroke","black")
+                .attr("stroke-width",".5px");
+            
+            circles
+                .exit()
+                .remove()
+
+            circles
+                .attr("cx", d => { return Math.floor(Math.random() * (canvasWidth - 10)) })
+                .attr("cy", d => { return Math.floor(Math.random() * (canvasHeight - 10)) })
+                .attr("r",d => { return d.size } )
+                .attr("fill", d=> {return d.color} )
+                .attr("stroke","black")
+                .attr("stroke-width",".5px");
+        }
+
+        function animate(data) {
+            updateViz(data);
+            var loop = setInterval(function() { 
+                if (data.length === 0) { clearInterval(loop); }
+                data.pop();
+                updateViz(data);
+            }, 2000);
+        }
+
+        function logCircleLocations() {
+            $('#positions').append('<li>'+ +'</li>');
+
+        }
+
+        </script>
+        <p>Sean Kirk</p>
+    </body>
+
+</html>

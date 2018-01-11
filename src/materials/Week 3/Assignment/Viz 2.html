@@ -1,0 +1,100 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>D3 Training - Assignment #3 - Part 2</title>
+        <script type="text/javascript" src="d3\d3.js"></script>
+    </head>
+    <body>
+        <style>
+            .rectangle {
+                fill: blue;
+                border-style:dashed;
+            }
+                
+        </style>
+        <h1>Assignment #3 - Part 2</h1>
+        <script type="text/javascript">
+       
+
+        let canvasHeight = 200;
+        let canvasWidth = 1000;
+
+        let svg = d3.select("body").append("svg");
+        svg.attr("height", canvasHeight);
+        svg.attr("width", canvasWidth); 
+
+        let svg2 = d3.select("body").append("svg");
+        svg2.attr("height", canvasHeight);
+        svg2.attr("width", canvasWidth); 
+       
+        d3.json('/data.json', function (error, data) {
+            createVisualizationOne(data, svg);
+            createVisualizationTwo(data, svg2);
+        });      
+
+        function createVisualizationOne(data, svg) {
+            
+            let xPosition = 0;
+            
+            var rectangles = svg.selectAll("rect").data(data);
+            let padding = 10;
+            
+            rectangles
+                .enter()
+                .append("rect")
+                .attr("x", (d, i) => {
+                    var newPosition = (xPosition + padding);
+                    xPosition = newPosition + d.size;                  
+                    return newPosition;})
+                //.attr("y", (d, i) => {return (i + 1)*100})
+                .attr("height", d => {return d.size})
+                .attr("width", d => {return d.size})
+                .attr("fill", d=> {return d.color})
+                .attr("stroke","black");    
+
+            rectangles
+                .exit()
+                .remove()
+            
+            rectangles
+                .attr("x", (d, i) => {
+                    var newPosition = (xPosition + padding);
+                    xPosition = newPosition + d.size;                  
+                    return newPosition;})
+                //.attr("y", (d, i) => {return (i + 1)*100})
+                .attr("height", d => {return d.size})
+                .attr("width", d => {return d.size})
+                .attr("fill", d=> {return d.color})
+                .attr("stroke","black");
+        }
+
+        function createVisualizationTwo(data, svg) {
+            var circles = svg.selectAll("circle").data(data);
+            
+            //(`size`, -2*`size`)
+            circles
+                .enter()
+                .append("circle")
+                .attr("cx", d => { return d.size})
+                .attr("cy", d => {return (2*d.size)})
+                .attr("r",5)
+                .attr("fill", d=> {return d.color})
+                .attr("stroke","black");
+            
+            circles
+                .exit()
+                .remove()
+
+            circles
+                .attr("cx", d => { return d.size})
+                .attr("cy", d => {return (2*d.size)})
+                .attr("r",5)
+                .attr("fill", d=> {return d.color})
+                .attr("stroke","black");
+        }
+       
+        </script>
+
+    </body>
+
+</html>
