@@ -1,0 +1,6 @@
+# Assignment 4
+### Part 3 - Visualization Critique
+
+This visualization lacks some context; while the colors are familiar in the context of the US political system, the lack of labels to describe what is being visualized leaves much to be desired.  I find the placement of the labels for the different categories a bit jarring and think it might serve the visualization better to have them all lined up on one side of the bar. I find the overall design, the side by side bar charts, to be visually appealing to look at but makes it hard do make some cross party comparisons, so another format might be better served for that. 
+
+For my suggested alternative - while still not knowing what the units are, I thought it might make sense to visually group the categories where one side beats out the other. I thought a stacked bar chart would be better for doing comparisons between the two parties.  I did continue to use the color scheme of the original, since its familiar and generally representitve of the party being visualized; however, including a key/legen of this mapping is also important.
