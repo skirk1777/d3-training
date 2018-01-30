@@ -1,0 +1,13 @@
+body {
+    font-size: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.graph-title {
+    font-size: 24px;
+}
+
+.y-axis-label, .x-axis-label {
+    font-size: 10px;
+}
+ 
